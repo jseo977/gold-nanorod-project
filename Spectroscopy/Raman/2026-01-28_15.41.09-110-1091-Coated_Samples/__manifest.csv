@@ -1,0 +1,54 @@
+ASSET_PATH,ASSET_ID,CONTENT_LENGTH,CRC32_CHECKSUM
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026,2512229748,,
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_6_times_dataset0.wdf,2512229756,88570,DBE8A15B
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/488_633nm_10s_5perc.wdf,2512229757,275089,8E0304E6
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_6_times_Copy1.txt,2512229758,360010,CE7DD4FC
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_6_times_Copy.txt,2512229759,360010,CE7DD4FC
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_1_dataset0.wxd,2512229760,554726,3183C26D
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_6_times.wdf,2512229761,308600,FE785FA7
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_6_times_dataset0.wxd,2512229762,556050,F8F4A9F5
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_2_Copy.txt,2512229763,237996,90BB6F4
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_1.wdf,2512229764,280683,F25944DF
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_C_633nm_10s_5perc_1_Copy.txt,2512229765,120190,8310B468
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_D_633nm_10s_5perc_1.wdf,2512229768,275482,F0616FC0
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_D_633nm_10s_5perc_1_Copy.txt,2512229769,46037,76FA9B92
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_D_633nm_20s_5perc_1.wdf,2512229770,275482,7D6665BF
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_D_633nm_20s_5perc_1_Copy.txt,2512229771,46037,69EC8BAA
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_D_633nm_40s_5perc_1.wdf,2512229773,275483,7B417D31
+/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples/28_01_2026/Sample_D_633nm_40s_5perc_1_Copy.txt,2512229776,47650,32BA3CE3
+,,,
+,,,
+,,,
+SUMMARY,,,
+file.count.total:,16,,
+file.size.total:,4108095,,
+file.size.min:,46037,,
+file.size.max:,556050,,
+file.size.avg:,256755,,
+,,,
+FILE TYPE STATISTICS,,,
+file.count (content/unknown):,9,,
+file.size (content/unknown):,2890165,,
+file.count (text/plain):,7,,
+file.size (text/plain):,1217930,,
+,,,
+FILE SIZE STATISTICS,,,
+file.count [10 kB ~ 100 kB):,4,,
+file.size [10 kB ~ 100 kB):,228294,,
+file.count [100 kB ~ 1 MB):,12,,
+file.size [100 kB ~ 1 MB):,3879801,,
+,,,
+,,,
+,,,
+MEDIAFLUX METADATA,,,
+shareable.id:,110,,
+shareable.name:,Materials Characterisation and Fabrication Platform - Raman upload,,
+shareable.valid.from:,03-Nov-2020 14:40:47,,
+shareable.property(facility.notification.from):,"MC-FP@unimelb.edu.au",,
+shareable.property(facility.name):,"Materials Characterisation and Fabrication Platform - Raman",,
+shareable.property(facility.notification.to):,"mc-fp@unimelb.edu.au",,
+upload.id:,1091,,
+upload.arg(name-suffix):,"Coated_Samples",,
+upload.arg(share-with):,"jaemin@student.unimelb.edu.au",,
+upload.collection:,/projects/mcfp/proj-mcfp_inviaraman-1128.4.139/data/2026-01-28_15.41.09-110-1091-Coated_Samples,,
+upload.completion.time:,Wed Jan 28 16:45:04 AEDT 2026,,
