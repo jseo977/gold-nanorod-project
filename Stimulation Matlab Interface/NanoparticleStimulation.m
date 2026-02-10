@@ -3,36 +3,29 @@ classdef HybridStimulation < matlab.apps.AppBase
     % Properties that correspond to app components
     properties (Access = public)
         UIFigure                       matlab.ui.Figure
+
         FolderEditFieldLabel           matlab.ui.control.Label
         FolderEditField                matlab.ui.control.EditField
-        FrequenciesHzEditFieldLabel      matlab.ui.control.Label
+
+        FrequenciesHzEditFieldLabel    matlab.ui.control.Label
         FrequencyEditField             matlab.ui.control.NumericEditField
+
         CellNumberEditFieldLabel       matlab.ui.control.Label
         CellNumberEditField            matlab.ui.control.NumericEditField
+
         PulseRepeatsEditFieldLabel     matlab.ui.control.Label
         PulseRepeatsEditField          matlab.ui.control.NumericEditField
-        OptionsDropDownLabel           matlab.ui.control.Label
-        OptionsDropDown                matlab.ui.control.DropDown
-        ElectricalStimulationCheckBox  matlab.ui.control.CheckBox
+
         PulsemsEditFieldLabel          matlab.ui.control.Label
         ElecPulseEditField             matlab.ui.control.NumericEditField
         MaxAmppAEditFieldLabel         matlab.ui.control.Label
         ElecMaxAmppAEditField          matlab.ui.control.NumericEditField
-        MinAmppAEditFieldLabel         matlab.ui.control.Label
-        ElecMinAmppAEditField          matlab.ui.control.NumericEditField
-        StepsEditFieldLabel            matlab.ui.control.Label
-        ElecStepsEditField             matlab.ui.control.NumericEditField
         ElecRandomCheckBox             matlab.ui.control.CheckBox
-        OpticalStimulationCheckBox     matlab.ui.control.CheckBox
         OptRandomCheckBox              matlab.ui.control.CheckBox
         PulsemsEditField_2Label        matlab.ui.control.Label
         OptPulseEditField              matlab.ui.control.NumericEditField
         MaxAmp0or18004095Label         matlab.ui.control.Label
         OptMaxAmpEditField             matlab.ui.control.NumericEditField
-        MinAmp0or18004095Label         matlab.ui.control.Label
-        OptMinAmpEditField             matlab.ui.control.NumericEditField
-        StepsEditField_2Label          matlab.ui.control.Label
-        OptStepsEditField              matlab.ui.control.NumericEditField
         CheckWaveformButton            matlab.ui.control.Button
         StimulateButton                matlab.ui.control.Button
         InitiateButton                 matlab.ui.control.Button
@@ -113,7 +106,6 @@ classdef HybridStimulation < matlab.apps.AppBase
             Folder=app.FolderEditField.Value;
             CellNum=app.CellNumberEditField.Value;
             
-            Option=app.OptionsDropDown.Value;
             if(exist([Folder '/' date '/Cell' num2str(CellNum)],'file')==7)
             else
                 mkdir([Folder '/' date '/Cell' num2str(CellNum)]);
@@ -126,19 +118,13 @@ classdef HybridStimulation < matlab.apps.AppBase
             
             Freq = app.FrequencyEditField.Value;
             Pulses = app.PulseRepeatsEditField.Value;
-            
-            ElecValue = app.ElectricalStimulationCheckBox.Value;
+
             ElecPulse = app.ElecPulseEditField.Value;
             ElecMax = app.ElecMaxAmppAEditField.Value;
-            ElecMin = app.ElecMinAmppAEditField.Value;
-            ElecStep = app.ElecStepsEditField.Value;
             ElecRandom = app.ElecRandomCheckBox.Value;
             
-            OptValue = app.OpticalStimulationCheckBox.Value;
             OptPulse = app.OptPulseEditField.Value;
             OptMax = app.OptMaxAmpEditField.Value;
-            OptMin = app.OptMinAmpEditField.Value;
-            OptStep = app.OptStepsEditField.Value;
             OptRandom = app.OptRandomCheckBox.Value;
             OptDelay= app.OpticalDelayEditField.Value;
             
@@ -156,8 +142,6 @@ classdef HybridStimulation < matlab.apps.AppBase
             fprintf(fid,T);
             T=sprintf('ElecMin : %.1f pA\n',ElecMin);
             fprintf(fid,T);
-            T=sprintf('ElecSteps : %d\n',ElecStep);
-            fprintf(fid,T);
             T=sprintf('ElecRandom : %d\n',ElecRandom);
             fprintf(fid,T);
             
@@ -166,8 +150,6 @@ classdef HybridStimulation < matlab.apps.AppBase
             T=sprintf('OptPulse : %.1f ms\n',OptPulse);
             fprintf(fid,T);
             T=sprintf('OptMax : %.1f pA\n',OptMax);
-            fprintf(fid,T);
-            T=sprintf('OptMin : %.1f pA\n',OptMin);
             fprintf(fid,T);
             T=sprintf('OptSteps : %d\n',OptStep);
             fprintf(fid,T);
@@ -199,8 +181,6 @@ classdef HybridStimulation < matlab.apps.AppBase
             app.FrequencyEditField.Enable = 'on';
             app.PulseRepeatsEditFieldLabel.Enable = 'on';
             app.PulseRepeatsEditField.Enable = 'on';
-            app.OptionsDropDownLabel.Enable = 'on';
-            app.OptionsDropDown.Enable = 'on';
             
             %% Initiate Electrical Stimulation
             %             %% Needs Updates
@@ -217,123 +197,83 @@ classdef HybridStimulation < matlab.apps.AppBase
         end
 
         % Value changed function: OptionsDropDown
-        function OptionsDropDownValueChanged(app, event)
-            %%%Set up different stimulation options
-            
-            value = app.OptionsDropDown.Value;
-            
-            %%Electrical
-            app.ElectricalStimulationCheckBox.Enable = 'off';
-            app.ElectricalStimulationCheckBox.Value = false;
-            app.PulsemsEditFieldLabel.Enable = 'off';
-            app.ElecPulseEditField.Enable = 'off';
-            app.MaxAmppAEditFieldLabel.Enable = 'off';
-            app.ElecMaxAmppAEditField.Enable = 'off';
-            app.MinAmppAEditFieldLabel.Enable = 'off';
-            app.ElecMinAmppAEditField.Enable = 'off';
-            app.StepsEditFieldLabel.Enable = 'off';
-            app.ElecStepsEditField.Enable = 'off';
-            app.ElecRandomCheckBox.Enable = 'off';
-            app.ElecStepsEditField.Value = 1;
-            app.ElecRandomCheckBox.Value = false;
-            %%Optical
-            app.OpticalStimulationCheckBox.Enable = 'off';
-            app.OpticalStimulationCheckBox.Value = false;
-            app.PulsemsEditField_2Label.Enable = 'off';
-            app.OptPulseEditField.Enable = 'off';
-            app.MaxAmp0or18004095Label.Enable = 'off';
-            app.OptMaxAmpEditField.Enable = 'off';
-            app.MinAmp0or18004095Label.Enable = 'off';
-            app.OptMinAmpEditField.Enable = 'off';
-            app.StepsEditField_2Label.Enable = 'off';
-            app.OptStepsEditField.Enable = 'off';
-            app.OptRandomCheckBox.Enable = 'off';
-            app.OptStepsEditField.Value = 1;
-            app.OptRandomCheckBox.Value= false;
-            app.OpticalDelayEditField.Enable = 'off';
-            app.CheckWaveformButton.Enable = 'off';
-            app.StimulateButton.Enable = 'off';
-            
-            switch value
-                case 'Single Amplitude'
-                    %%Electrical
-                    app.ElectricalStimulationCheckBox.Enable = 'on';
-                    app.PulsemsEditFieldLabel.Enable = 'on';
-                    app.ElecPulseEditField.Enable = 'on';
-                    app.MaxAmppAEditFieldLabel.Enable = 'on';
-                    app.ElecMaxAmppAEditField.Enable = 'on';
-                    %%Optical
-                    app.OpticalStimulationCheckBox.Enable = 'on';
-                    app.PulsemsEditField_2Label.Enable = 'on';
-                    app.OptPulseEditField.Enable = 'on';
-                    app.MaxAmp0or18004095Label.Enable = 'on';
-                    app.OptMaxAmpEditField.Enable = 'on';
-                    app.CheckWaveformButton.Enable = 'on';
-                    app.OpticalDelayEditField.Enable = 'on';
-                    
-                case 'Electrical Threshold Check'
-                    %%Electrical
-                    app.ElectricalStimulationCheckBox.Enable = 'on';
-                    app.ElectricalStimulationCheckBox.Value = true;
-                    app.PulsemsEditFieldLabel.Enable = 'on';
-                    app.ElecPulseEditField.Enable = 'on';
-                    app.MaxAmppAEditFieldLabel.Enable = 'on';
-                    app.ElecMaxAmppAEditField.Enable = 'on';
-                    app.MinAmppAEditFieldLabel.Enable = 'on';
-                    app.ElecMinAmppAEditField.Enable = 'on';
-                    app.StepsEditFieldLabel.Enable = 'on';
-                    app.ElecStepsEditField.Enable = 'on';
-                    app.ElecRandomCheckBox.Enable = 'on';
-                    app.CheckWaveformButton.Enable = 'on';
-                    
-                case 'Optical Threshold Check'
-                    %%Optical
-                    app.OpticalStimulationCheckBox.Enable = 'on';
-                    app.OpticalStimulationCheckBox.Value = true;
-                    app.PulsemsEditField_2Label.Enable = 'on';
-                    app.OptPulseEditField.Enable = 'on';
-                    app.MaxAmp0or18004095Label.Enable = 'on';
-                    app.OptMaxAmpEditField.Enable = 'on';
-                    app.MinAmp0or18004095Label.Enable = 'on';
-                    app.OptMinAmpEditField.Enable = 'on';
-                    app.StepsEditField_2Label.Enable = 'on';
-                    app.OptStepsEditField.Enable = 'on';
-                    app.OptRandomCheckBox.Enable = 'on';
-                    app.CheckWaveformButton.Enable = 'on';
-                    app.OpticalDelayEditField.Enable = 'on';
-                    
-                case 'Hybrid Stimulation Threshold Check'
-                    %%Electrical
-                    app.ElectricalStimulationCheckBox.Enable = 'on';
-                    app.ElectricalStimulationCheckBox.Value = true;
-                    app.PulsemsEditFieldLabel.Enable = 'on';
-                    app.ElecPulseEditField.Enable = 'on';
-                    app.MaxAmppAEditFieldLabel.Enable = 'on';
-                    app.ElecMaxAmppAEditField.Enable = 'on';
-                    app.MinAmppAEditFieldLabel.Enable = 'on';
-                    app.ElecMinAmppAEditField.Enable = 'on';
-                    app.StepsEditFieldLabel.Enable = 'on';
-                    app.ElecStepsEditField.Enable = 'on';
-                    app.ElecRandomCheckBox.Enable = 'on';
-                    %%Optical
-                    app.OpticalStimulationCheckBox.Enable = 'on';
-                    app.OpticalStimulationCheckBox.Value = true;
-                    app.PulsemsEditField_2Label.Enable = 'on';
-                    app.OptPulseEditField.Enable = 'on';
-                    app.MaxAmp0or18004095Label.Enable = 'on';
-                    app.OptMaxAmpEditField.Enable = 'on';
-                    app.MinAmp0or18004095Label.Enable = 'on';
-                    app.OptMinAmpEditField.Enable = 'on';
-                    app.StepsEditField_2Label.Enable = 'on';
-                    app.OptStepsEditField.Enable = 'on';
-                    app.OptRandomCheckBox.Enable = 'on';
-                    app.CheckWaveformButton.Enable = 'on';
-                    app.OpticalDelayEditField.Enable = 'on';
-                    
-                otherwise
-            end
-            
-        end
+        % function OptionsDropDownValueChanged(app, event)
+        %     %%%Set up different stimulation options
+        % 
+        %     value = app.OptionsDropDown.Value;
+        % 
+        %     %%Electrical
+        %     app.PulsemsEditFieldLabel.Enable = 'off';
+        %     app.ElecPulseEditField.Enable = 'off';
+        %     app.MaxAmppAEditFieldLabel.Enable = 'off';
+        %     app.ElecMaxAmppAEditField.Enable = 'off';
+        %     app.ElecRandomCheckBox.Enable = 'off';
+        %     app.ElecRandomCheckBox.Value = false;
+        %     %%Optical
+        %     app.PulsemsEditField_2Label.Enable = 'off';
+        %     app.OptPulseEditField.Enable = 'off';
+        %     app.MaxAmp0or18004095Label.Enable = 'off';
+        %     app.OptMaxAmpEditField.Enable = 'off';
+        %     app.OptRandomCheckBox.Enable = 'off';
+        %     app.OptRandomCheckBox.Value= false;
+        %     app.OpticalDelayEditField.Enable = 'off';
+        %     app.CheckWaveformButton.Enable = 'off';
+        %     app.StimulateButton.Enable = 'off';
+        % 
+        %     switch value
+        %         case 'Single Amplitude'
+        %             %%Electrical
+        %             app.PulsemsEditFieldLabel.Enable = 'on';
+        %             app.ElecPulseEditField.Enable = 'on';
+        %             app.MaxAmppAEditFieldLabel.Enable = 'on';
+        %             app.ElecMaxAmppAEditField.Enable = 'on';
+        %             %%Optical
+        %             app.PulsemsEditField_2Label.Enable = 'on';
+        %             app.OptPulseEditField.Enable = 'on';
+        %             app.MaxAmp0or18004095Label.Enable = 'on';
+        %             app.OptMaxAmpEditField.Enable = 'on';
+        %             app.CheckWaveformButton.Enable = 'on';
+        %             app.OpticalDelayEditField.Enable = 'on';
+        % 
+        %         case 'Electrical Threshold Check'
+        %             %%Electrical
+        %             app.PulsemsEditFieldLabel.Enable = 'on';
+        %             app.ElecPulseEditField.Enable = 'on';
+        %             app.MaxAmppAEditFieldLabel.Enable = 'on';
+        %             app.ElecMaxAmppAEditField.Enable = 'on';
+        %             app.ElecRandomCheckBox.Enable = 'on';
+        %             app.CheckWaveformButton.Enable = 'on';
+        % 
+        %         case 'Optical Threshold Check'
+        %             %%Optical
+        %             app.PulsemsEditField_2Label.Enable = 'on';
+        %             app.OptPulseEditField.Enable = 'on';
+        %             app.MaxAmp0or18004095Label.Enable = 'on';
+        %             app.OptMaxAmpEditField.Enable = 'on';
+        %             app.OptRandomCheckBox.Enable = 'on';
+        %             app.CheckWaveformButton.Enable = 'on';
+        %             app.OpticalDelayEditField.Enable = 'on';
+        % 
+        %         case 'Hybrid Stimulation Threshold Check'
+        %             %%Electrical
+        %             app.PulsemsEditFieldLabel.Enable = 'on';
+        %             app.ElecPulseEditField.Enable = 'on';
+        %             app.MaxAmppAEditFieldLabel.Enable = 'on';
+        %             app.ElecMaxAmppAEditField.Enable = 'on';
+        %             app.ElecRandomCheckBox.Enable = 'on';
+        %             %%Optical
+        %             app.PulsemsEditField_2Label.Enable = 'on';
+        %             app.OptPulseEditField.Enable = 'on';
+        %             app.MaxAmp0or18004095Label.Enable = 'on';
+        %             app.OptMaxAmpEditField.Enable = 'on';
+        %             app.OptRandomCheckBox.Enable = 'on';
+        %             app.CheckWaveformButton.Enable = 'on';
+        %             app.OpticalDelayEditField.Enable = 'on';
+        % 
+        %         otherwise
+        %     end
+        % 
+        % end
 
         % Button pushed function: CheckWaveformButton
         function CheckWaveformButtonPushed(app, event)
@@ -346,11 +286,8 @@ classdef HybridStimulation < matlab.apps.AppBase
             Freq = app.FrequencyEditField.Value;
             Pulses = app.PulseRepeatsEditField.Value;
             
-            ElecValue = app.ElectricalStimulationCheckBox.Value;
             ElecPulse = app.ElecPulseEditField.Value;
             ElecMax = app.ElecMaxAmppAEditField.Value;
-            ElecMin = app.ElecMinAmppAEditField.Value;
-            ElecStep = app.ElecStepsEditField.Value;
             ElecRandom = app.ElecRandomCheckBox.Value;
             
             if ElecValue == 0
@@ -359,18 +296,14 @@ classdef HybridStimulation < matlab.apps.AppBase
                 ElecStep = 1;
                 ElecRandom = 0;
             end
-            
-            OptValue = app.OpticalStimulationCheckBox.Value;
+
             OptPulse = app.OptPulseEditField.Value;
             OptMax = app.OptMaxAmpEditField.Value;
-            OptMin = app.OptMinAmpEditField.Value;
-            OptStep = app.OptStepsEditField.Value;
             OptRandom = app.OptRandomCheckBox.Value;
             OptDelay= app.OpticalDelayEditField.Value;
             
             if OptValue == 0
                 OptMax = 0;
-                OptMin = 0;
                 OptStep = 1;
                 OptRandom = 0;
             end
@@ -455,8 +388,6 @@ classdef HybridStimulation < matlab.apps.AppBase
             OptWave=app.optWave;
             ElecAmp=app.elecAmp;
             OptAmp=app.optAmp;
-            OptValue = app.OpticalStimulationCheckBox.Value;
-            OptStep=app.OptStepsEditField.Value;
             OptPulse = app.OptPulseEditField.Value;
             Omax=max(OptAmp(:));
             
@@ -653,27 +584,6 @@ classdef HybridStimulation < matlab.apps.AppBase
             app.PulseRepeatsEditField.Position = [114 442 100 22];
             app.PulseRepeatsEditField.Value = 10;
 
-            % Create OptionsDropDownLabel
-            app.OptionsDropDownLabel = uilabel(app.UIFigure);
-            app.OptionsDropDownLabel.HorizontalAlignment = 'right';
-            app.OptionsDropDownLabel.Enable = 'off';
-            app.OptionsDropDownLabel.Position = [51 404 48 22];
-            app.OptionsDropDownLabel.Text = 'Options';
-
-            % Create OptionsDropDown
-            app.OptionsDropDown = uidropdown(app.UIFigure);
-            app.OptionsDropDown.Items = {'None', 'Single Amplitude', 'Electrical Threshold Check', 'Optical Threshold Check', 'Hybrid Stimulation Threshold Check'};
-            app.OptionsDropDown.ValueChangedFcn = createCallbackFcn(app, @OptionsDropDownValueChanged, true);
-            app.OptionsDropDown.Enable = 'off';
-            app.OptionsDropDown.Position = [114 404 100 22];
-            app.OptionsDropDown.Value = 'None';
-
-            % Create ElectricalStimulationCheckBox
-            app.ElectricalStimulationCheckBox = uicheckbox(app.UIFigure);
-            app.ElectricalStimulationCheckBox.Enable = 'off';
-            app.ElectricalStimulationCheckBox.Text = 'Electrical Stimulation';
-            app.ElectricalStimulationCheckBox.Position = [11 364 134 22];
-
             % Create PulsemsEditFieldLabel
             app.PulsemsEditFieldLabel = uilabel(app.UIFigure);
             app.PulsemsEditFieldLabel.HorizontalAlignment = 'right';
@@ -699,43 +609,11 @@ classdef HybridStimulation < matlab.apps.AppBase
             app.ElecMaxAmppAEditField.Enable = 'off';
             app.ElecMaxAmppAEditField.Position = [114 304 100 22];
 
-            % Create MinAmppAEditFieldLabel
-            app.MinAmppAEditFieldLabel = uilabel(app.UIFigure);
-            app.MinAmppAEditFieldLabel.HorizontalAlignment = 'right';
-            app.MinAmppAEditFieldLabel.Enable = 'off';
-            app.MinAmppAEditFieldLabel.Position = [21 274 78 22];
-            app.MinAmppAEditFieldLabel.Text = 'Min Amp (pA)';
-
-            % Create ElecMinAmppAEditField
-            app.ElecMinAmppAEditField = uieditfield(app.UIFigure, 'numeric');
-            app.ElecMinAmppAEditField.Enable = 'off';
-            app.ElecMinAmppAEditField.Position = [114 274 100 22];
-
-            % Create StepsEditFieldLabel
-            app.StepsEditFieldLabel = uilabel(app.UIFigure);
-            app.StepsEditFieldLabel.HorizontalAlignment = 'right';
-            app.StepsEditFieldLabel.Enable = 'off';
-            app.StepsEditFieldLabel.Position = [62 244 37 22];
-            app.StepsEditFieldLabel.Text = 'Steps';
-
-            % Create ElecStepsEditField
-            app.ElecStepsEditField = uieditfield(app.UIFigure, 'numeric');
-            app.ElecStepsEditField.Limits = [0 Inf];
-            app.ElecStepsEditField.Enable = 'off';
-            app.ElecStepsEditField.Position = [114 244 100 22];
-            app.ElecStepsEditField.Value = 1;
-
             % Create ElecRandomCheckBox
             app.ElecRandomCheckBox = uicheckbox(app.UIFigure);
             app.ElecRandomCheckBox.Enable = 'off';
             app.ElecRandomCheckBox.Text = 'Random';
             app.ElecRandomCheckBox.Position = [161 364 68 22];
-
-            % Create OpticalStimulationCheckBox
-            app.OpticalStimulationCheckBox = uicheckbox(app.UIFigure);
-            app.OpticalStimulationCheckBox.Enable = 'off';
-            app.OpticalStimulationCheckBox.Text = 'Optical Stimulation';
-            app.OpticalStimulationCheckBox.Position = [11 214 124 22];
 
             % Create OptRandomCheckBox
             app.OptRandomCheckBox = uicheckbox(app.UIFigure);
@@ -768,31 +646,6 @@ classdef HybridStimulation < matlab.apps.AppBase
             app.OptMaxAmpEditField.Limits = [0 4095];
             app.OptMaxAmpEditField.Enable = 'off';
             app.OptMaxAmpEditField.Position = [114 153 100 22];
-
-            % Create MinAmp0or18004095Label
-            app.MinAmp0or18004095Label = uilabel(app.UIFigure);
-            app.MinAmp0or18004095Label.HorizontalAlignment = 'right';
-            app.MinAmp0or18004095Label.Enable = 'off';
-            app.MinAmp0or18004095Label.Position = [5 106 94 28];
-            app.MinAmp0or18004095Label.Text = {'Min Amp'; '(0 or 1800-4095)'};
-
-            % Create OptMinAmpEditField
-            app.OptMinAmpEditField = uieditfield(app.UIFigure, 'numeric');
-            app.OptMinAmpEditField.Enable = 'off';
-            app.OptMinAmpEditField.Position = [114 112 100 22];
-
-            % Create StepsEditField_2Label
-            app.StepsEditField_2Label = uilabel(app.UIFigure);
-            app.StepsEditField_2Label.HorizontalAlignment = 'right';
-            app.StepsEditField_2Label.Enable = 'off';
-            app.StepsEditField_2Label.Position = [62 75 37 22];
-            app.StepsEditField_2Label.Text = 'Steps';
-
-            % Create OptStepsEditField
-            app.OptStepsEditField = uieditfield(app.UIFigure, 'numeric');
-            app.OptStepsEditField.Enable = 'off';
-            app.OptStepsEditField.Position = [114 75 100 22];
-            app.OptStepsEditField.Value = 1;
 
             % Create CheckWaveformButton
             app.CheckWaveformButton = uibutton(app.UIFigure, 'push');
